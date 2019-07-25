@@ -1,124 +1,103 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(new MyApp());
+void main() {
+  runApp(new LoginPage());
+}
 
-class MyApp extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return new _LoginPageState();
+  }
+}
+
+class _LoginPageState extends State<LoginPage> {
+
+  /// 全局 Key 用来获取Form表单组件
+  GlobalKey<FormState> loginKey = new GlobalKey<FormState>();
+
+  /// 用户名
+  String userName;
+
+  /// 密码
+  String password;
+
+  void login() {
+    // 读取当前的Form状态
+    var loginForm = loginKey.currentState;
+
+    // 验证Form表单
+    if (loginForm.validate()) {
+      loginForm.save();
+      print('userName:' + userName + ' password:' + password);
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '容器组件示例',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('容器组件示例'),
+    // TODO: implement build
+    return new MaterialApp(
+      title: 'Form表单示例',
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: new Text('Form表单示例'),
         ),
-        body: Column(
+        body: new Column(
           children: <Widget>[
-            Row (
-              children: <Widget>[
-                Container(
-                  width: 200,
-                  height: 200,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    border: new Border.all(
-                      color: Colors.grey,
-                      width: 8.0,
-                    ),
-                    borderRadius: const BorderRadius.all(const Radius.circular(8.0)),
-                  ),
-                  child: Text(
-                    'Flutter',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 28),
-                  ),
-                ),
-                Image.network(
-                  'https://cdn.jsdelivr.net/gh/flutterchina/website@1.0/images/flutter-mark-square-100.png',
-                  fit: BoxFit.fitWidth,
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Column(
-                  children: <Widget>[
-                    Text(
-                      '红色+黑色删除线+25号',
-                      style: TextStyle(
-                        color: const Color(0xffff0000),
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: const Color(0xff000000),
-                        fontSize: 25,
-                        letterSpacing: 10,
-                      ),
-                    ),
-                    Text(
-                      '橙色 + 下划线 +24 号',
-                      style: TextStyle(
-                        color: const Color(0xffff9900),
-                        decoration: TextDecoration.underline,
-                        fontSize: 24,
-                      ),
-                    ),
-                    Text(
-                      '虚线上划线 +23 号 +倾斜',
-                      style: TextStyle(
-                        decoration: TextDecoration.overline,
-                        decorationStyle: TextDecorationStyle.dashed,
-                        fontSize: 23.0,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                    Text(
-                      '24号+加粗',
-                      style: TextStyle(
-                        fontSize: 23,
-                        fontStyle: FontStyle.italic,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 6,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.phone,
-                  color: Colors.green[500],
-                  size: 80,
-                ),
-                IconButton(
-                    icon: Icon(
-                      Icons.volume_up,
-                      size: 48,
-                    ),
-                    tooltip: '按下操作',
-                    onPressed: () {
-                      print('按下操作');
-                    },
-                ),
-                RaisedButton(
-                  onPressed: () {
-                    
-                  },
-                  child: Text('RaisedButton组件'),
-                ),
-                    
+            new Container(
+              padding: const EdgeInsets.all(16.0),
+              child: new Form(
+                  key: loginKey,
+                  child: new Column(
+                    children: <Widget>[
+                      new TextFormField(
+                        decoration: new InputDecoration(
+                          labelText: '请输入用户名',
+                        ),
+                        onSaved: (value) {
+                          userName = value;
+                        },
+                        onFieldSubmitted: (value) {
 
-              ],
-            )
+                        },
+                      ),
+                      new TextFormField(
+                        decoration: new InputDecoration(
+                          labelText: '请输入密码',
+                        ),
+                        obscureText: true,
+                        validator: (value) {
+                          return value.length < 6 ? '密码长度不够6位' : null;
+                        },
+                        onSaved: (value) {
+                          password = value;
+                        },
+                      ),
+                    ],
+                  )
+              ),
+            ),
+            new SizedBox(
+              width: 340.0,
+              height: 42,
+              child: new RaisedButton(
+                onPressed: login,
+                child: new Text(
+                  '登录',
+                  style: TextStyle(
+                    fontSize: 18.0,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
-
-
-
-
-
       ),
     );
   }
+
 
 }
