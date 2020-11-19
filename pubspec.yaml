@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   english_words: ^3.1.0
   random_color: ^1.0.3
+  cached_network_image: ^2.0.0-rc
 
 dev_dependencies:
   flutter_test:
@@ -44,8 +45,10 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-   - images/lake.jpg
-  #  - images/a_dot_ham.jpeg
+   - images/nav/ic_back2_nor.png
+   - images/nav/ic_back2_pressed.png
+   - images/banner/homepage_switching_point.png
+   - images/banner/homepage_switching_point_white.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
