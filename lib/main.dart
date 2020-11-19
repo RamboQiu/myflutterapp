@@ -24,7 +24,7 @@ class YXCatlev1Page extends StatelessWidget {
         }),
       ),
       body: ListView.separated(
-        itemCount: 5,
+        itemCount: 6,
         itemBuilder: (context, index) {
           if (index <= 1) {
             return Container(
@@ -118,6 +118,11 @@ class YXCatlev1Page extends StatelessWidget {
             return Container(
               height: 10,
               color: Color(0xFFF4F4F4),
+            );
+          } else {
+            return Container(
+              height: 10,
+              color: Colors.red,
             );
           }
         },
